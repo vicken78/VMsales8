@@ -119,9 +119,9 @@ namespace VMSales8.Logic
         {
             if (primaryKeys.Length > 0)
             {
-                return primaryKeys[0].GetValue(item); // Assuming a single primary key for simplicity.
+                return primaryKeys[0].GetValue(item)!; // Assuming a single primary key for simplicity.
             }
-            return null;
+            return null!;
         }
 
         // Compare method that returns ObservableCollection<T>

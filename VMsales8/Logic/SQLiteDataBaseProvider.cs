@@ -35,15 +35,13 @@ namespace VMSales8.Logic
         {
             if (IsConnected)
                 return false;
-            Filepath = null;
             return true;
         }
         public IDbConnection ObtainConnection()
         {
             if (!IsConnected)
                 throw new InvalidOperationException("Cant obtain a connection when disconnected!");
-            return new SQLiteConnection($"Data Source=\"{Filepath}\";FailIfMissing = True; Foreign Keys = True; Version=3;");
-
+            return new SqliteConnection($"Data Source=\"{Filepath}\";FailIfMissing = True; Foreign Keys = True; Version=3;");
         }
     }
 }

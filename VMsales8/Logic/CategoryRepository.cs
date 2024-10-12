@@ -1,10 +1,5 @@
 ﻿using Caliburn.Micro;
 using Dapper;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Transactions;
-using VMSales8.Models;
-using VMSales8.Logic;
 using VMSales8.Models;
 
 namespace VMSales8.Logic
