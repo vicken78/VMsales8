@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data;
 
-namespace VMSales8.Logic
+namespace VMsales8.Logic
 {
+
     public abstract class Repository<T> : IRepository<T> where T : class
     {
         protected IDbConnection Connection { get; }
@@ -100,5 +96,7 @@ namespace VMSales8.Logic
             disposed = true;
         }
         #endregion
+
     }
+
 }

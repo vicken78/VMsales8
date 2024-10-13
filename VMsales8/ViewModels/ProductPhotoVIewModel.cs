@@ -2,7 +2,7 @@
 
 namespace VMsales8.ViewModels
 {
-    public class CategoryViewModel : BaseModel
+    public class ProductPhotoVIewModel : BaseModel
     {
     }
 }

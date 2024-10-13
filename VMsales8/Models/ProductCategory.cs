@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VMsales8.Logic
+namespace VMsales8.Models
 {
-    internal class CategoryRepository
+    public class ProductCategory : BaseModel
     {
     }
 }

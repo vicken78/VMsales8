@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace VMsales8.Logic
 {
-    internal class CategoryRepository
+    internal class ProductRepository
     {
     }
 }

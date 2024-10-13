@@ -4,11 +4,10 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using VMSales8.Models;
+using System.Text.RegularExpressions;
+using VMsales8.Models;
 
-namespace VMSales8.Logic
+namespace VMsales8.Logic
 {
     public class DataProcessor<T> where T : BaseModel // Constrain T to inherit BaseViewModel
     {
@@ -119,9 +118,9 @@ namespace VMSales8.Logic
         {
             if (primaryKeys.Length > 0)
             {
-                return primaryKeys[0].GetValue(item)!; // Assuming a single primary key for simplicity.
+                return primaryKeys[0].GetValue(item); // Assuming a single primary key for simplicity.
             }
-            return null!;
+            return null;
         }
 
         // Compare method that returns ObservableCollection<T>

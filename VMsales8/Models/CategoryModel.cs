@@ -1,7 +1,6 @@
 ﻿using Dapper.Contrib.Extensions;
-using VMSales8.Models;
 
-namespace VMSales8.Models
+namespace VMsales8.Models
 {
     [Table("category")]
     public class CategoryModel : BaseModel

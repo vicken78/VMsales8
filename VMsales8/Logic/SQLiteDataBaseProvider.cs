@@ -1,8 +1,9 @@
 ﻿using Microsoft.Data.Sqlite;
-using System;
+using System.Configuration;
 using System.Data;
+using System.IO;
 
-namespace VMSales8.Logic
+namespace VMsales8.Logic
 {
 
     public interface IDatabaseProvider
@@ -22,6 +23,14 @@ namespace VMSales8.Logic
         protected virtual void OnConnected() { }
         public virtual bool Connect(string filepath)
         {
+         
+            filepath = ConfigurationManager.AppSettings["DatabaseFilePath"];
+
+            if (string.IsNullOrEmpty(filepath) && File.Exists(filepath))
+            {
+                throw new FileNotFoundException();
+            }
+
             if (IsConnected)
                 return false;
 
@@ -42,6 +51,7 @@ namespace VMSales8.Logic
             if (!IsConnected)
                 throw new InvalidOperationException("Cant obtain a connection when disconnected!");
             return new SqliteConnection($"Data Source=\"{Filepath}\";FailIfMissing = True; Foreign Keys = True; Version=3;");
+
         }
     }
 }

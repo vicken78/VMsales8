@@ -1,14 +1,9 @@
 ﻿using Caliburn.Micro;
-using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using VMSales8.Logic;
 
-namespace VMSales8.Models
+
+namespace VMsales8.Models
 {
     public class BaseModel : PropertyChangedBase
     {
@@ -38,11 +33,12 @@ namespace VMSales8.Models
             return filePath;
         }
 
-        public static IDatabaseProvider getprovider()
+  /*      public static IDatabaseProvider getprovider()
         {
             string filepath = SetDataBase();
             SQLiteDatabase dataBaseProvider = new SQLiteDatabase(filepath);
             return dataBaseProvider;
         }
+  */
     }
 }
