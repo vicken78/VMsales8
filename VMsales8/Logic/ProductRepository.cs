@@ -288,7 +288,7 @@ namespace VMsales8.Logic
 
             return await Connection.QueryAsync<ProductModel>("SELECT DISTINCT " +
                 "ppo.*, c.category_pk, c.category_name, p.product_pk, p.brand_name, p.product_name, p.description, p.quantity, " +
-                "p.cost, p.sku, p.listed_price, p.instock, p.condition, p.listing_url, p.listing_number, p.listing_date " +
+                "CAST (p.cost AS real) as cost, p.sku, CAST(p.listed_price AS real) as listed_price, p.instock, p.condition, p.listing_url, p.listing_number, p.listing_date " +
                 "FROM product_purchase_order as ppo, product as p, product_category as pc, " +
                 "category as c, product_supplier as ps, supplier as s, purchase_order_detail as pod " +
                 "INNER JOIN product_purchase_order on pod.purchase_order_detail_pk = ppo.purchase_order_detail_fk " +
