@@ -1,6 +1,4 @@
 ﻿using Dapper.Contrib.Extensions;
-using VMsales8.ViewModels;
-using System.Windows.Media;
 
 namespace VMsales8.Models
 {

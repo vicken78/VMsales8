@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Dapper.Contrib.Extensions;
 
 namespace VMsales8.Models
 {
-    public class ProductPurchaseOrderModel : BaseModel
+    public partial class ProductModel
     {
+        [ExplicitKey]
+        public int product_purchase_order_pk { get; set; }
+        public int product_order_detail_fk { get; set; }
+        public int product_fk { get; set; }
+        public int product_supplier_pk { get; set; }
+        public int supplier_fk { get; set; }
     }
 }
+

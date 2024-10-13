@@ -1,6 +1,7 @@
 ﻿using Caliburn.Micro;
 using System.Configuration;
 using System.IO;
+using VMsales8.Logic;
 
 
 namespace VMsales8.Models
@@ -33,12 +34,12 @@ namespace VMsales8.Models
             return filePath;
         }
 
-  /*      public static IDatabaseProvider getprovider()
+        public static IDatabaseProvider getprovider()
         {
             string filepath = SetDataBase();
             SQLiteDatabase dataBaseProvider = new SQLiteDatabase(filepath);
             return dataBaseProvider;
         }
-  */
+  
     }
 }

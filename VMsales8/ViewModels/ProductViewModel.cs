@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using Microsoft.Win32;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Media.Imaging;
@@ -483,10 +484,10 @@ namespace VMsales8.ViewModels
             if (Selectedfilelist != null)
             {
                 // Handle opening the selected files
-                IWindowManager _windowManager = new WindowManager();
-                var popupwindow = new ProductPhotoViewModel(SelectedProduct, Selectedfilelist);
-                _windowManager.ShowWindowAsync(popupwindow);
-                LoadFileList();
+              //  IWindowManager _windowManager = new WindowManager();
+               // var popupwindow = new ProductPhotoViewModel(SelectedProduct, Selectedfilelist);
+               // _windowManager.ShowWindowAsync(popupwindow);
+              //  LoadFileList();
             }
         }
 
@@ -497,10 +498,10 @@ namespace VMsales8.ViewModels
 
             if (SelectedProduct.product_pk > 0)
             {
-                PhotoRepository PhotoRepo = new PhotoRepository(dataBaseProvider);
-                filelist = PhotoRepo.GetFileList(SelectedProduct.product_pk).Result.ToObservable();
-                PhotoRepo.Commit();
-                PhotoRepo.Dispose();
+              //  PhotoRepository PhotoRepo = new PhotoRepository(dataBaseProvider);
+              //  filelist = PhotoRepo.GetFileList(SelectedProduct.product_pk).Result.ToObservable();
+              //  PhotoRepo.Commit();
+              //  PhotoRepo.Dispose();
             }
             else
             {
@@ -518,8 +519,8 @@ namespace VMsales8.ViewModels
             {
                 string filePath = openFileDialog.FileName;
                 IWindowManager _windowManager = new WindowManager();
-                var popupwindow = new ProductPhotoViewModel(SelectedProduct, filePath);
-                _ = _windowManager.ShowWindowAsync(popupwindow);
+         //       var popupwindow = new ProductPhotoViewModel(SelectedProduct, filePath);
+       //         _ = _windowManager.ShowWindowAsync(popupwindow);
             }
         }
 
@@ -578,7 +579,6 @@ namespace VMsales8.ViewModels
                     condition = item.condition,
                     cost = item.cost,
                     description = item.description,
-                    FontColor = item.FontColor,
                     instock = item.instock,
                     listed_price = item.listed_price,
                     listing_date = item.listing_date,
