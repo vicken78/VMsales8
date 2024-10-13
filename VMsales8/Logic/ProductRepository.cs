@@ -40,7 +40,7 @@ namespace VMsales8.Logic
         {
 
             return await Connection.QueryAsync<ProductModel>("SELECT " +
-            "p.product_pk, p.brand_name, p.product_name, p.description, p.quantity, p.cost, p.sku, p.listed_price, " +
+            "p.product_pk, p.brand_name, p.product_name, p.description, p.quantity, CAST(p.cost AS REAL) as cost, p.sku, CAST(p.listed_price AS REAL) as listed_price, " +
             "p.instock, p.condition, p.listing_url, p.listing_number, p.listing_date, c.category_name, pc.category_fk, pc.product_category_pk " +
             "FROM product AS p " +
             "LEFT OUTER JOIN (" +

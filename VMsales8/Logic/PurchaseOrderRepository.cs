@@ -1,5 +1,6 @@
 ﻿using Caliburn.Micro;
 using Dapper;
+using System;
 using System.Windows;
 using VMsales8.Logic;
 using VMsales8.Models;
@@ -165,24 +166,25 @@ namespace VMsales8.Logic
         // get all purchase_order and purchase_order_detail
         public override async Task<IEnumerable<PurchaseOrderModel>> GetAll()
         {
-
-            return await Connection.QueryAsync<PurchaseOrderModel>("SELECT DISTINCT " +
-            "po.purchase_order_pk, pod.purchase_order_detail_pk, pod.purchase_order_fk, po.supplier_fk, sup.supplier_name, po.purchase_date, po.invoice_number, " +
-            "pod.lot_number, pod.lot_cost, pod.lot_quantity, pod.lot_name, pod.lot_description, pod.sales_tax, pod.shipping_cost, pod.quantity_check, " +
-               "CASE " +
-               "WHEN product_purchase_order.product_purchase_order_detail_fk IS NULL THEN 'True' " +
-               "ELSE 'False' " +
-            "END AS isproductinventory " +
-            "FROM " +
-               "purchase_order AS po " +
-            "JOIN " +
-               "purchase_order_detail AS pod ON po.purchase_order_pk = pod.purchase_order_fk " +
-            "JOIN " +
-               "supplier AS sup ON sup.supplier_pk = po.supplier_fk " +
-            "LEFT JOIN " +
-               "product_purchase_order ON pod.purchase_order_detail_pk = product_purchase_order.product_purchase_order_detail_fk");
-        }
-
+                    return await Connection.QueryAsync<PurchaseOrderModel>("SELECT DISTINCT " +
+                    "po.purchase_order_pk, pod.purchase_order_detail_pk, pod.purchase_order_fk, po.supplier_fk, sup.supplier_name, po.purchase_date, po.invoice_number, " +
+                    "pod.lot_number, CAST(pod.lot_cost AS REAL) AS lot_cost, pod.lot_quantity, pod.lot_name, pod.lot_description, CAST(pod.sales_tax AS REAL) as sales_tax, " +
+                    "CAST(pod.shipping_cost AS REAL) AS shipping_cost, pod.quantity_check, " +
+                       "CASE " +
+                       "WHEN product_purchase_order.product_purchase_order_detail_fk IS NULL THEN 'True' " +
+                       "ELSE 'False' " +
+                    "END AS isproductinventory " +
+                    "FROM " +
+                       "purchase_order AS po " +
+                    "JOIN " +
+                       "purchase_order_detail AS pod ON po.purchase_order_pk = pod.purchase_order_fk " +
+                    "JOIN " +
+                       "supplier AS sup ON sup.supplier_pk = po.supplier_fk " +
+                    "LEFT JOIN " +
+                       "product_purchase_order ON pod.purchase_order_detail_pk = product_purchase_order.product_purchase_order_detail_fk");
+            
+            }
+        
 
         public async Task<IEnumerable<bool>> CheckForProductfk()
         {

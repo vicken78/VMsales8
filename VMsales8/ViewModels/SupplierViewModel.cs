@@ -3,7 +3,7 @@ using System.Windows;
 using VMsales8.Logic;
 using VMsales8.Models;
 
-namespace VMSales.ViewModels
+namespace VMsales8.ViewModels
 {
     public class SupplierViewModel : BaseModel
     {

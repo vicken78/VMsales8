@@ -5,7 +5,6 @@ using System.IO;
 
 namespace VMsales8.Logic
 {
-
     public interface IDatabaseProvider
     {
         IDbConnection ObtainConnection();
@@ -13,45 +12,52 @@ namespace VMsales8.Logic
 
     public class SQLiteDatabase : IDatabaseProvider
     {
-        public bool IsConnected => Filepath != null;
+        public bool IsConnected => !string.IsNullOrEmpty(Filepath) && File.Exists(Filepath);
         public string Filepath { get; private set; }
+
         public SQLiteDatabase(string filepath)
         {
             if (filepath != null)
                 Connect(filepath);
         }
+
         protected virtual void OnConnected() { }
+
         public virtual bool Connect(string filepath)
         {
-         
-            filepath = ConfigurationManager.AppSettings["DatabaseFilePath"];
+            // Get from app settings if not provided directly
+            filepath = ConfigurationManager.AppSettings["DatabaseFilePath"] ?? filepath;
 
-            if (string.IsNullOrEmpty(filepath) && File.Exists(filepath))
+            if (string.IsNullOrEmpty(filepath) || !File.Exists(filepath))
             {
-                throw new FileNotFoundException();
+                throw new FileNotFoundException($"Database file '{filepath}' not found.");
             }
 
             if (IsConnected)
                 return false;
 
-            Filepath = filepath ?? throw new ArgumentNullException(nameof(filepath));
-
+            Filepath = filepath;
             OnConnected();
 
             return true;
         }
+
         public virtual bool Disconnect()
         {
-            if (IsConnected)
+            if (!IsConnected)
                 return false;
+
+            Filepath = null;
             return true;
         }
+
         public IDbConnection ObtainConnection()
         {
             if (!IsConnected)
-                throw new InvalidOperationException("Cant obtain a connection when disconnected!");
-            return new SqliteConnection($"Data Source=\"{Filepath}\";FailIfMissing = True; Foreign Keys = True; Version=3;");
+                throw new FileNotFoundException($"The database file at '{Filepath}' does not exist.");
 
+            var connectionString = $"Data Source=\"{Filepath}\"; Foreign Keys=True;";
+            return new SqliteConnection(connectionString);
         }
     }
 }

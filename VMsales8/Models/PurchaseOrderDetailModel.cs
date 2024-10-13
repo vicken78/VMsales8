@@ -110,7 +110,7 @@ namespace VMsales8.Models
             }
         }
 
-        private decimal _shipping_cost;
+        private decimal _shipping_cost { get; set; }
         public decimal shipping_cost
         {
             get => _shipping_cost;
@@ -118,7 +118,7 @@ namespace VMsales8.Models
             {
                 if (_shipping_cost != value)
                     _shipping_cost = value;
-                NotifyOfPropertyChange(() => shipping_cost);
+                NotifyOfPropertyChange(nameof(shipping_cost));
             }
         }
 
